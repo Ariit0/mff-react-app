@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFetch } from '../../hooks/useFetch';
 
-import { Card } from 'react-bootstrap';
+import { JobCard } from '../JobCard/JobCard.component';
 
 export const JobCardList = (props) => {
     const res = useFetch("http://localhost:8080/beta/jobs", {});
@@ -10,17 +10,12 @@ export const JobCardList = (props) => {
         return <div>Loading...</div>
     }
 
-    const jobs = res.response;
+    const jobList = res.response;
 
     return (
         <div className='row'> {
-            jobs.map(job => (
-                <div className="col">
-                    <Card style={{ width: '9rem' }}>
-                        <Card.Img src="/images/id_09501_thum_atlas.png" style={{ height: '100%' }} />
-                            <p style={{ overflow: 'hidden' }}>{job.jobName}</p>
-                    </Card>
-                </div>
+            jobList.map(job => (
+                <JobCard jobs={job} />
             ))
         } </div>
     );
